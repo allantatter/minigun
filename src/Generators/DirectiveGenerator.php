@@ -2,37 +2,13 @@
 
 class DirectiveGenerator extends Generator {
 
-    private $path = 'public/assets/scripts';
+    use JavascriptGeneratorTrait;
 
-    private $template = 'templates/angular/directive.js';
+    protected $path = 'public/assets/scripts';
 
-    private $directivePath = 'directives';
+    protected $template = 'templates/angular/directive.js';
 
-    public function generate($filename)
-    {
-        $response = [];
+    protected $directivePath = 'directives';
 
-        $destPath = $this->path . '/' . $this->directivePath . '/' . $filename;
-
-        $response = array_merge($response, $this->createMissingDirectories($destPath));
-
-        $this->breakIfFileExists($destPath);
-
-        $response[] = $this->createFile($destPath);
-
-        $response[] = $this->addScriptTag('directives', $destPath);
-
-        return $response;
-    }
-
-    /**
-     * @param $destPath
-     * @return string
-     */
-    public function createFile($destPath)
-    {
-        $this->filesystem->dumpFile($destPath, file_get_contents(__DIR__ . '/../' . $this->template));
-
-        return '<info>File was created at ' . $destPath . '</info>';
-    }
+    protected $scriptsBlockType = 'directives';
 }

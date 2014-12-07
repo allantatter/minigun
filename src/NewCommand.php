@@ -1,6 +1,5 @@
 <?php namespace Acme;
 
-use Acme\Generators\DirectiveGenerator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,7 +18,23 @@ class NewCommand extends Command {
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $generator = new DirectiveGenerator(new Filesystem());
+        $types = [
+            'ctrl'          => 'ControllerGenerator',
+            'controller'    => 'ControllerGenerator',
+            'directive'     => 'DirectiveGenerator',
+            'filter'        => 'FilterGenerator',
+            'model'         => 'ModelGenerator',
+            'service'       => 'ServiceGenerator',
+            'validator'     => 'ValidatorGenerator',
+        ];
+
+        if (!array_key_exists($input->getArgument('type'), $types)) {
+            $output->writeln('<error>Invalid type "' . $input->getArgument('type') . '".</error>');
+            return;
+        }
+
+        $class = 'Acme\\Generators\\' . $types[$input->getArgument('type')];
+        $generator = new $class(new Filesystem());
 
         $filename = $input->getArgument('filename');
 
