@@ -4,7 +4,7 @@ class DirectiveGenerator extends Generator {
 
     private $path = 'public/assets/scripts';
 
-    private $template = 'src/templates/angular/directive.js';
+    private $template = 'templates/angular/directive.js';
 
     private $directivePath = 'directives';
 
@@ -31,7 +31,7 @@ class DirectiveGenerator extends Generator {
      */
     public function createFile($destPath)
     {
-        $this->filesystem->dumpFile($destPath, file_get_contents($this->template));
+        $this->filesystem->dumpFile($destPath, file_get_contents(__DIR__ . '/../' . $this->template));
 
         return '<info>File was created at ' . $destPath . '</info>';
     }
