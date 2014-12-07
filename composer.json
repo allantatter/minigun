@@ -1,0 +1,28 @@
+{
+    "name": "allantatter/minigun",
+    "type": "library",
+    "description": "File generation helper tool",
+    "keywords": ["file", "generation"],
+    "homepage": "http://github.com/allantatter/minigun",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Allan Tatter",
+            "email": "allan.tatter@gmail.com",
+            "homepage": "https://www.allantatter.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "symfony/console": "~2.0",
+        "symfony/filesystem": "~2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Acme\\": "src"
+        }
+    },
+    "bin": [
+        "mg"
+    ]
+}
