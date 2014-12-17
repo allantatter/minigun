@@ -38,6 +38,8 @@ class NewCommand extends Command {
 
         $filename = $input->getArgument('filename');
 
+        $filename = $this->autoAddExtensionIfNeeded($filename, '.js');
+
         $response = $generator->generate($filename);
 
         foreach ($response as $line)
@@ -46,5 +48,12 @@ class NewCommand extends Command {
         }
 
         $output->writeln('<info>Task "new" completed.</info>');
+    }
+
+    public function autoAddExtensionIfNeeded($filename, $extension) {
+        //check if file ending is correct
+        $filename = $extension == (substr($filename, -(strlen($extension)))) ? $filename : $filename.$extension;
+
+        return $filename;
     }
 }
