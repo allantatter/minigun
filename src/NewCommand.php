@@ -38,6 +38,13 @@ class NewCommand extends Command {
 
         $filename = $input->getArgument('filename');
 
+        //check if filename ends with .js, if not then add .js
+        $fileEnding = substr($filename, -3);
+
+        $requiredFileEnding = '.js';
+
+        $filename = $fileEnding == $requiredFileEnding ? $filename : $filename.$requiredFileEnding;
+
         $response = $generator->generate($filename);
 
         foreach ($response as $line)
